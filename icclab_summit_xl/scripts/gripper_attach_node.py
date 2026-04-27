@@ -37,7 +37,7 @@ import open3d as o3d
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
-from std_msgs.msg import String, Empty
+from std_msgs.msg import String, Empty, Bool
 from sensor_msgs.msg import PointCloud2
 from geometry_msgs.msg import TransformStamped, Pose, Point
 from shape_msgs.msg import Mesh, MeshTriangle
@@ -184,6 +184,24 @@ class GripperAttachNode(Node):
         # Gz attach/detach publishers (bridged to Gazebo DetachableJoint)
         self._gz_attach_pub = self.create_publisher(String, '/gripper/attach', 5)
         self._gz_detach_pub = self.create_publisher(Empty,  '/gripper/detach', 5)
+
+        # Latched ground-truth attach state for the pick agent.
+        # TRANSIENT_LOCAL so a subscriber that connects after the attach
+        # event still receives the latest state.
+        status_qos = QoSProfile(
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=1,
+        )
+        # Verbose status: "attached:<model_name>" or "detached"
+        self._status_pub = self.create_publisher(String, '/gripper/status', status_qos)
+        # Plain bool: True = something is attached, False = nothing attached.
+        # For consumers that only care about the state, not the model name.
+        self._attached_pub = self.create_publisher(Bool, '/gripper/attached', status_qos)
+        # Publish initial state so late subscribers always get a value.
+        self._status_pub.publish(String(data='detached'))
+        self._attached_pub.publish(Bool(data=False))
 
         # Explicit detach trigger from pick-and-place scripts.
         # Accept both Empty (original) and String (works reliably over rosbridge,
@@ -395,6 +413,8 @@ class GripperAttachNode(Node):
         )
 
         self._attached = True
+        self._status_pub.publish(String(data=f'attached:{self._target_model}'))
+        self._attached_pub.publish(Bool(data=True))
         self.get_logger().info(
             f'Attached "{self._target_model}" '
             f'(Gz DetachableJoint + MoveIt collision object on {self._attach_link})'
@@ -414,6 +434,8 @@ class GripperAttachNode(Node):
         self._target_model     = None
         self._collision_obj_id = None
         self._object_pos       = None
+        self._status_pub.publish(String(data='detached'))
+        self._attached_pub.publish(Bool(data=False))
 
     # ------------------------------------------------------------------
     # MoveIt planning scene helpers
