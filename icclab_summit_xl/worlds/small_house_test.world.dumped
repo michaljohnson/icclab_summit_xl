@@ -1,0 +1,701 @@
+<sdf version=\'1.10\'>
+  <world name=\'world_demo\'>
+    <gui>
+      <camera name=\'gzclient_camera\'>
+        <pose>-4.4965503 -0.4874 1.5086839999999999 0 0 0</pose>
+      </camera>
+    </gui>
+    <atmosphere type=\'adiabatic\'/>
+    <physics name=\'1ms\' type=\'ignored\'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name=\'ignition::gazebo::systems::Physics\' filename=\'libignition-gazebo-physics-system.so\'/>
+    <plugin name=\'ignition::gazebo::systems::UserCommands\' filename=\'libignition-gazebo-user-commands-system.so\'/>
+    <plugin name=\'ignition::gazebo::systems::SceneBroadcaster\' filename=\'libignition-gazebo-scene-broadcaster-system.so\'/>
+    <plugin name=\'ignition::gazebo::systems::Imu\' filename=\'ignition-gazebo-imu-system\'/>
+    <plugin name=\'ignition::gazebo::systems::Sensors\' filename=\'ignition-gazebo-sensors-system\'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin name=\'icclab::DynamicGripperAttach\' filename=\'DynamicGripperAttach\'>
+      <parent_model>summit</parent_model>
+      <parent_link>arm_wrist_3_link</parent_link>
+      <attach_topic>/gripper/attach</attach_topic>
+      <detach_topic>/gripper/detach</detach_topic>
+    </plugin>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+      <origin_visual>false</origin_visual>
+    </scene>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <model name=\'AirconditionerA_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_AirconditionerA_01</uri>
+      </include>
+      <pose>-9.1994100000000003 2.4112300000000002 2.0845440000000002 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Bed_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Bed_01</uri>
+      </include>
+      <pose>-6.1650669999999996 2.0305599999999999 -1.0000000000000001e-05 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'NightStand_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_NightStand_01</uri>
+      </include>
+      <pose>-7.7255099999999999 2.86042 0.0052579999999999997 -2.0000000000013344e-06 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'NightStand_01_002\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_NightStand_01</uri>
+      </include>
+      <pose>-4.4073409999999997 2.86042 0.0052560000000000003 0 2.0000000000013344e-06 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Board_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Board_01</uri>
+      </include>
+      <pose>2.7790729999999999 -5.392703 1.538173 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ChairA_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose>7.1151599999918504 0.20902799999120922 -1.0251887335886996e-06 -8.9175770430218241e-10 9.6947696776732533e-09 -1.5560700000000027</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ChairA_01_002\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose>6.255059999998581 0.21946799999816458 -3.6775646881797554e-07 -1.6652893716067268e-09 9.8415317321863067e-09 -1.5041399999999991</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ChairA_01_003\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose>6.0667800000002359 1.6807499999997866 -3.6535413991283169e-07 -1.665513921001734e-09 9.8434430613746208e-09 1.5698600000000003</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ChairA_01_004\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose>7.0027699999999244 1.6707399999997719 -3.6525004431693423e-07 -1.6648545490386039e-09 9.8378398160494814e-09 1.5236299999999998</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ChairA_01_005\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose>-8.2709400000005395 1.9166499999999627 -3.6652378342558402e-07 -1.6660131060040302e-09 9.8476805257616077e-09 -8.3930884140375705e-18</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Carpet_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Carpet_01</uri>
+      </include>
+      <pose>0.78505000000000003 -1.1066469999999999 0.001106 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'CoffeeTable_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_CoffeeTable_01</uri>
+      </include>
+      <pose>1.5123009999999999 -1.733438 0.041982999999999999 0 0 0.01</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'CookingBench_01_001\'>
+      <include>
+        <uri>model://aws_robomaker_residential_CookingBench_01</uri>
+      </include>
+      <pose>9.0938512576764268 -3.5959498162329839 0.90920667239308595 2.3837166593688095e-07 5.1814961172210356e-07 -3.1363834366722605</pose>
+      <static>true</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Curtain_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Curtain_01</uri>
+      </include>
+      <pose>-9.1726419999999997 0.20376 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'KitchenTable_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_KitchenTable_01</uri>
+      </include>
+      <pose>6.5526899999999655 0.95117300000000682 -8.826521758817994e-07 -7.9583265839229908e-08 2.4507201002705656e-07 -1.5641299999999678</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ReadingDesk_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ReadingDesk_01</uri>
+      </include>
+      <pose>-8.9872620000088386 2.0570579999644281 0.0014534219948669437 2.4750830361772824e-08 -6.074813535207046e-09 -0.0046379999999997161</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Door_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Door_01</uri>
+      </include>
+      <pose>6.001449 -5.5490019999999998 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Screwdriver\'>
+      <include>
+        <uri>model://craftsman_grip_screwdriver_phillips_cushion</uri>
+      </include>
+      <pose>1.382703609095121 -1.6355882793904728 0.36408278073842909 0.14731196404044689 0.0073252957519741799 0.39136322025624681</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Spatula\'>
+      <include>
+        <uri>model://oxo_cookie_spatula</uri>
+      </include>
+      <pose>6.2001163415080729 4.0851163290288399 -647876.49200587417 -0.034003446395792052 0.33022945546118765 -1.0703579056444052</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Scissors\'>
+      <include>
+        <uri>model://diamond_visions_scissors_red</uri>
+      </include>
+      <pose>1.5728288498698553 -1.7758606434194599 0.36550813878738658 -0.0057538048688103574 -0.018287017853515979 -6.0201175058129564e-06</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'FoldingDoor_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_FoldingDoor_01</uri>
+      </include>
+      <pose>-2.461096 1.8442190000000001 0.041881000000000002 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'FoldingDoor_01_002\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_FoldingDoor_01</uri>
+      </include>
+      <pose>-2.461096 -4.0533200000000003 0.041881000000000002 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Handle_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Handle_01</uri>
+      </include>
+      <pose>5.7240000000000002 -5.5229999999999997 0.99380000000000002 0 0 -3.1415000000000002</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'HouseWallB_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_HouseWallB_01</uri>
+      </include>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'FloorB_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_FloorB_01</uri>
+      </include>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'KitchenCabinet_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_KitchenCabinet_01</uri>
+      </include>
+      <pose>8.0020089999999993 -3.8365089999999999 0.012068000000000001 0 0 -3.1400009999999998</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'KitchenUtensils_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_KitchenUtensils_01</uri>
+      </include>
+      <pose>9.2854779999999995 -5.021261 1.141805 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'LightC_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_LightC_01</uri>
+      </include>
+      <pose>1.7695669999999999 -5.4443710000000003 2 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'LightC_01_002\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_LightC_01</uri>
+      </include>
+      <pose>-0.13824500000000001 -5.4443710000000003 2 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'PortraitA_01\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_PortraitA_01</uri>
+      </include>
+      <pose>-2.7123599999999999 -4.817539 1 0 0 1.5667960000000005</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'PortraitB_02\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_PortraitB_02</uri>
+      </include>
+      <pose>5.7370169999999998 3.0803099999999999 0.29999999999999999 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'PortraitA_02\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_PortraitA_02</uri>
+      </include>
+      <pose>7.937017 3.0803099999999999 0.29999999999999999 0 0 3.1400000000000001</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'PortraitC_01\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_PortraitC_01</uri>
+      </include>
+      <pose>-9.2949040000000007 -4.526084 1 0 0 1.5547340000000001</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'PortraitD_02\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_PortraitD_02</uri>
+      </include>
+      <pose>6.8701809999999996 3.0803099999999999 1.4884390000000001 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'PortraitE_01\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_PortraitE_01</uri>
+      </include>
+      <pose>-5.7730940000000004 -5.4924660000000003 1 0 0 3.1326269999999998</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'DeskPortraitA_02\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_DeskPortraitA_02</uri>
+      </include>
+      <pose>2.0460930946129974 -1.8929262647528609 0.065166658947006725 -0.00054688090526340278 4.0066389251660058e-08 1.576219942551117</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'DeskPortraitC_01\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_DeskPortraitC_01</uri>
+      </include>
+      <pose>-7.7463761413636485 2.7310760179018798 0.69452597409132688 1.1688669151166066e-05 -1.1291180138115558e-07 -0.055498960051568118</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'DeskPortraitC_02\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_DeskPortraitC_02</uri>
+      </include>
+      <pose>0.96461656075846414 -1.5869522481285345 0.06612785506954752 1.5401218048384504e-05 -3.9167628317281874e-07 -1.5786987638606313</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'DeskPortraitD_01\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_DeskPortraitD_01</uri>
+      </include>
+      <pose>2.6455599999785258 -5.3762250001291259 1.5741647551023132 -8.0203405773959496e-07 8.4884330160221854e-08 -3.1128259999999961</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'DeskPortraitD_03\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_DeskPortraitD_03</uri>
+      </include>
+      <pose>1.8267290010945845 -1.4648810006893758 0.064783941812982443 8.9521563154989588e-07 -1.6964285054832574e-07 -3.1143800000063737</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'DeskPortraitD_04\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_DeskPortraitD_04</uri>
+      </include>
+      <pose>4.3021576242404951 -5.1764444751897374 0.083464355960804759 1.7092832661527462e-07 -2.5071448604441409e-07 3.0450390049354432</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Rangehood_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Rangehood_01</uri>
+      </include>
+      <pose>9.0197939999999992 -3.3699400000000002 1.5076050000000001 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Refrigerator_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Refrigerator_01</uri>
+      </include>
+      <pose>8.702731 -1.0320309999999999 0 0 0 -1.5634990000000004</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'SeasoningBox_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_SeasoningBox_01</uri>
+      </include>
+      <pose>9.1079679806558396 -2.6517260036235144 0.90976575683041372 1.8439286306930768e-07 7.3557281396202027e-07 0.0012900001970394229</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'ShoeRack_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_ShoeRack_01</uri>
+      </include>
+      <pose>4.2979779998423542 -5.1735660006961535 0.0044586785309215279 1.559641504670519e-07 -3.5302886776717657e-08 2.3526065954986058e-15</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'SofaC_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_SofaC_01</uri>
+      </include>
+      <pose>0.72979604464160008 -0.52975799675935442 -0.040873767280093308 0.0095357519918271728 -0.033354760674190603 0.0079887142070891523</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Tableware_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Tableware_01</uri>
+      </include>
+      <pose>7.1531709434838415 0.98276682112128233 0.81901419582454671 1.889886436536178e-06 -5.3394105413705294e-07 1.0247598876803663</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Trash_01_002\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Trash_01</uri>
+      </include>
+      <pose>-8.7041509999972497 1.0005800000025087 0.00090318414853546899 -2.7474347144278602e-09 2.6829934008324009e-09 -3.6324284748783886e-18</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'TV_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_TV_01</uri>
+      </include>
+      <pose>0.82425899999999996 -5.382968 0.67628200000000005 0 0 -1.5617439999999998</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'TVCabinet_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_TVCabinet_01</uri>
+      </include>
+      <pose>0.62950899999999999 -5.1835760000000004 -0.017049000000000002 0 0 1.5791999999999995</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Vase_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Vase_01</uri>
+      </include>
+      <pose>3.0556613812479521 -5.4130800022028822 1.5749085403498453 4.0421413490111527e-06 3.3660629822700537e-07 0.00084400928840913821</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'Wardrobe_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_Wardrobe_01</uri>
+      </include>
+      <pose>-3.1467100000000001 2.4762040000000001 0.00070399999999999998 0 0 -1.5696730000000001</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_001\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>-9.4185999999999996 -0.026284999999999999 0.50273900000000005 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_002\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>-9.4185999999999996 -2.3740899999999998 0.50273900000000005 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_003\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>9.4226159999999997 -3.3739810000000001 0.50273900000000005 0 0 -3.1360990000000002</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_004\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>9.4225580000000004 0.96852000000000005 0.49658099999999999 0 0 -3.1360990000000002</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_005\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>4.7223170000000003 4.4702809999999999 0.50273900000000005 0 0 -3.1360990000000002</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_006\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>3.4885199999999998 5.6006879999999999 0.50273900000000005 0 0 -1.5662740000000004</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_007\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>1.140949 5.6006879999999999 0.50273900000000005 0 0 -1.5662740000000004</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_008\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>-1.1993400000000001 5.6006879999999999 0.50273900000000005 0 0 -1.5662740000000004</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name=\'RoomWindow_01_009\'>
+      <static>true</static>
+      <include>
+        <uri>model://aws_robomaker_residential_RoomWindow_01</uri>
+      </include>
+      <pose>-2.3966240000000001 4.387607 0.50273900000000005 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <include>
+      <uri>file://<urdf-string></uri>
+      <name>summit</name>
+      <pose>1.09121046237208 -0.7411727746378034 -1.9388634395460353e-05 4.1087888573884011e-06 -8.2009050426079254e-05 -1.3578828008730894</pose>
+    </include>
+    <include>
+      <uri>file:///home/ros/.gz/fuel/fuel.gazebosim.org/openrobotics/models/standard toilet/1</uri>
+      <name>Toilet</name>
+      <pose>3.4274100044067066 5.491576138318691 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/ros/.gz/fuel/fuel.gazebosim.org/openrobotics/models/bathroomsink/2</uri>
+      <name>BathroomSink</name>
+      <pose>2.584089994430542 5.4838500022888184 0.82004749774932861 0 0 0</pose>
+    </include>
+    <light name=\'LivingRoom_CeilingLight_0\' type=\'point\'>
+      <pose>1.194296 4.1557589999999998 2.2000000000000002 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.01</linear>
+        <constant>0.32000000000000001</constant>
+        <quadratic>0.029999999999999999</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name=\'LivingRoom_CeilingLight_1\' type=\'point\'>
+      <pose>1.194296 -1.5899589999999999 2.2000000000000002 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.01</linear>
+        <constant>0.050000000000000003</constant>
+        <quadratic>0.089999999999999997</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name=\'LivingRoom_WallLight_0\' type=\'point\'>
+      <pose>1.76956 -5.4443700000000002 2.2000000000000002 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.239999995 0.239999995 0.239999995 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0</linear>
+        <constant>0.12</constant>
+        <quadratic>0.029999999999999999</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name=\'LivingRoom_WallLight_1\' type=\'point\'>
+      <pose>-0.13825999999999999 -5.4443700000000002 2.2000000000000002 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.239999995 0.239999995 0.239999995 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0</linear>
+        <constant>0.12</constant>
+        <quadratic>0.029999999999999999</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name=\'TV_Light_0\' type=\'point\'>
+      <pose>0.82689999999999997 -4.9395769999999999 1.1000000000000001 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.313719988 0.313719988 0.349009991 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>3</range>
+        <linear>0.040000000000000001</linear>
+        <constant>0.10000000000000001</constant>
+        <quadratic>0.5</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name=\'BedRoom_Portrait_Light_0\' type=\'spot\'>
+      <pose>-6.1903790000000001 -1.8296969999999999 1.5587 0.3000000000000001 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.01</linear>
+        <constant>0.5</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0.59999999999999998</inner_angle>
+        <outer_angle>1</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
+    <light name=\'BedRoom_CeilingLight_0\' type=\'point\'>
+      <pose>-6.4510610000000002 -0.69203999999999999 2 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.01</linear>
+        <constant>0.32000000000000001</constant>
+        <quadratic>0.029999999999999999</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name=\'Kitchen_CeilingLight_0\' type=\'point\'>
+      <pose>7.8582000000000001 -1.5905 2.2799999999999998 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.100000001 0.100000001 0.100000001 1</specular>
+      <attenuation>
+        <range>20</range>
+        <linear>0.01</linear>
+        <constant>0.29999999999999999</constant>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
+
+
