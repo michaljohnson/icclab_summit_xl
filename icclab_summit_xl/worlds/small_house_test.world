@@ -84,14 +84,6 @@
         </include>
         <pose frame=''>-4.407341 2.860420 0.005256 0 0.000002 0</pose>
 	</model>
-	<model name='Board_01_001'>
-        <static>true</static>    
-        <include>
-            <uri>model://aws_robomaker_residential_Board_01</uri>
-        </include>
-        <pose frame=''>2.779073 -5.392703 1.538173 0 -0 0</pose>
-	</model>
-	
     <!-- Remove ceiling for easier view
 	<model name='RoomCeiling_01_001'>
         <static>true</static>
@@ -293,14 +285,6 @@
         <pose frame=''>7.937017 3.080310 0.300000 0 -0 3.14</pose>
 	</model>
 
-	<model name='PortraitC_01'>
-        <static>true</static>
-        <include>
-            <uri>model://aws_robomaker_residential_PortraitC_01</uri>
-        </include>
-        <pose frame=''>-3.94 -5.47 1.00 0 0 -3.07</pose>
-	</model>
-	
 	<model name='PortraitD_02'>
         <static>true</static>    
         <include>
@@ -348,14 +332,7 @@
         </include>
         <pose frame=''>4.53 -3.35 0 0 -0 1.56</pose>
 	</model>
-	<model name='ShoeRack_01_002'>
-        <static>true</static>
-        <include>
-            <uri>model://aws_robomaker_residential_ShoeRack_01</uri>
-        </include>
-        <pose frame=''>4.56 1.13 0 0 -0 1.56</pose>
-	</model>
-	<model name='SofaC_01_001'>
+<model name='SofaC_01_001'>
         <static>true</static>
         <include>
             <uri>model://aws_robomaker_residential_SofaC_01</uri>
@@ -401,14 +378,7 @@
         -->
         <pose frame=''>0.629509 -5.183576 -0.017049 0 -0 1.5792</pose>
 	</model>
-	<model name='Vase_01_001'>
-        <static>true</static>    
-        <include>
-            <uri>model://aws_robomaker_residential_Vase_01</uri>
-        </include>
-        <pose frame=''>3.055663 -5.413080 1.574958 0.000003 0.001700 0.000840</pose>
-	</model>`	
-	<model name='Wardrobe_01_001'>
+<model name='Wardrobe_01_001'>
         <static>true</static>    
         <include>
             <uri>model://aws_robomaker_residential_Wardrobe_01</uri>
@@ -736,14 +706,14 @@
       <include>
             <uri>model://KID_ROOM_FURNITURE_SET_1</uri>
       </include>
-      <pose frame=''>-8.13 -3.42 0 0 0 -3.14</pose>
+      <pose frame=''>-8.128650 -3.723380 0 0 0 -3.139440</pose>
     </model>
 
     <model name='KidsRoom_Ball'>
       <include>
             <uri>model://aws_robomaker_residential_Ball_01</uri>
       </include>
-      <pose frame=''>-5.78 -4.79 0.31 0 0 0</pose>
+      <pose frame=''>-6.37 -4.79 0.31 0 0 0</pose>
     </model>
 
     <!-- Step 7: Kids-room shelves with LEGO toys (decoration only, all static). -->
@@ -768,7 +738,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_Duplo_Build_and_Play_Box_4629</uri>
       </include>
-      <pose frame=''>-5.55 -2.63 0 0 0 1.63</pose>
+      <pose frame=''>-5.43 -4.59 0.00 0.08 -0.08 1.70</pose>
     </model>
 
     <model name='KidsRoom_Lego_Animals'>
@@ -776,7 +746,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_Duplo_Creative_Animals_10573</uri>
       </include>
-      <pose frame=''>-5.30 -3.25 0 0 0 0.17</pose>
+      <pose frame=''>-8.82 -3.67 1.11 0.01 0.00 -0.09</pose>
     </model>
 
     <model name='KidsRoom_Lego_DinoHQ'>
@@ -784,7 +754,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_5887_Dino_Defense_HQ</uri>
       </include>
-      <pose frame=''>-4.80 -2.50 0 0 0 0</pose>
+      <pose frame=''>-4.87 -4.61 0.03 -0.21 -0.02 0.09</pose>
     </model>
 
     <model name='KidsRoom_Lego_BricksMore'>
@@ -801,6 +771,114 @@
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_City_Advent_Calendar</uri>
       </include>
       <pose frame=''>-5.30 -1.76 0.77 -0.06 -0.01 0.00</pose>
+    </model>
+
+    <!-- Living room floor item: coke can (pickable). -->
+    <model name='LivingRoom_Coke'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coke</uri>
+      </include>
+      <pose frame=''>1.50 2.23 0.33 0 0 0</pose>
+    </model>
+
+    <!-- Living room floor item: small red cricket ball (pickable). -->
+    <model name='LivingRoom_CricketBall'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cricket Ball</uri>
+      </include>
+      <pose frame=''>2.500000 -3.867800 0.04 0 0 0</pose>
+    </model>
+
+    <!-- Living room side: brown trash bin (placement target). -->
+    <model name='LivingRoom_Trash'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/TrashBin</uri>
+      </include>
+      <pose frame=''>-1.50 -4.85 0 0 0 0</pose>
+    </model>
+
+    <!-- Kids room corner: brown trash bin. -->
+    <model name='KidsRoom_Trash'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/TrashBin</uri>
+      </include>
+      <pose frame=''>-3.430390 -1.529940 0 0 0 0</pose>
+    </model>
+
+    <!-- Books on ShoeRack_01_001: pending — paste exact Fuel URL of the
+         "Eat to Live ..." book and we'll re-add. URI variant tried 2026-04-29
+         (..._1lb4oz_paperback) returned 404. -->
+
+    <!-- Shoes on ShoeRack_01_001 (rack at 4.53, -3.35, yaw=1.56).
+         Z-tiers guessed: bottom ~0.05, middle ~0.25. Tweak after launch. -->
+    <model name='ShoeRack_Shoe_1'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+      </include>
+      <pose frame=''>4.53 -3.10 0.05 0 0 1.57</pose>
+    </model>
+
+    <model name='ShoeRack_Shoe_2'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+      </include>
+      <pose frame=''>4.53 -3.55 0.05 0 0 1.57</pose>
+    </model>
+
+    <model name='ShoeRack_Shoe_3'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+      </include>
+      <pose frame=''>4.53 -3.30 0.25 0 0 1.57</pose>
+    </model>
+
+    <!-- Breakfast menu on the kitchen table. -->
+    <model name='Kitchen_BreakfastMenu'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/breakfast menu decomposed</uri>
+      </include>
+      <pose frame=''>7.170500 0.807182 0.814079 -0.000668 -0.002137 -0.088219</pose>
+    </model>
+
+    <!-- Walking person in the living room. -->
+    <model name='LivingRoom_PersonWalking'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Walking person</uri>
+      </include>
+      <pose frame=''>3.379520 0.982936 0 0 0 -2.415100</pose>
+    </model>
+
+    <!-- Casual female standing in the kitchen, facing the cooking bench (+x). -->
+    <model name='Kitchen_CasualFemale'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Casual female</uri>
+      </include>
+      <pose frame=''>8.06 -4.58 0 0 0 0</pose>
+    </model>
+
+    <!-- Kid sitting in the kids room. -->
+    <model name='KidsRoom_VisitorKid'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/VisitorKidSit</uri>
+      </include>
+      <pose frame=''>-7.82 -2.43 0 0 0 -3.14</pose>
+    </model>
+
+    <!-- Kids room floor toy: Vtech stack rings (pickable). -->
+    <model name='KidsRoom_StackRings'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/Vtech_Stack_Sing_Rings_636_Months</uri>
+      </include>
+      <pose frame=''>-4.71 -2.95 0.05 0 0 0.01</pose>
     </model>
 
     <!-- Step 3: LivingRoom <-> Kitchen divider (N-S wall along x=3.5).

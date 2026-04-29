@@ -17,6 +17,13 @@ def generate_launch_description():
   rviz = launch.substitutions.LaunchConfiguration('rviz')
   map = launch.substitutions.LaunchConfiguration('map')
   params_file = launch.substitutions.LaunchConfiguration('params_file')
+  slam = launch.substitutions.LaunchConfiguration('slam')
+
+  ld.add_action(launch.actions.DeclareLaunchArgument(
+    name='slam',
+    description='Run SLAM (slam_toolbox) instead of localization',
+    default_value='False',
+  ))
 
   # ld.add_action(launch.actions.DeclareLaunchArgument(
   #   name='namespace',
@@ -59,6 +66,7 @@ def generate_launch_description():
       'use_namespace': 'false',
       'map': map,
       'params_file': params_file,
+      'slam': slam,
       }.items(),
   ))
   
