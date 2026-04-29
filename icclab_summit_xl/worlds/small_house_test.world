@@ -781,12 +781,20 @@
       <pose frame=''>1.50 2.23 0.33 0 0 0</pose>
     </model>
 
-    <!-- Living room floor item: small red cricket ball (pickable). -->
-    <model name='LivingRoom_CricketBall'>
+    <!-- Parent bedroom floor item: screwdriver (pickable). -->
+    <model name='Bedroom_Screwdriver'>
+      <include>
+            <uri>model://craftsman_grip_screwdriver_phillips_cushion</uri>
+      </include>
+      <pose frame=''>-5.50 0.00 0.025 0 0 0</pose>
+    </model>
+
+    <!-- Kids room floor item: small red cricket ball (pickable). -->
+    <model name='KidsRoom_CricketBall'>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cricket Ball</uri>
       </include>
-      <pose frame=''>2.500000 -3.867800 0.04 0 0 0</pose>
+      <pose frame=''>-5.14 -3.19 0.04 0 0 0</pose>
     </model>
 
     <!-- Living room side: brown trash bin (placement target). -->
@@ -843,7 +851,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/breakfast menu decomposed</uri>
       </include>
-      <pose frame=''>7.170500 0.807182 0.814079 -0.000668 -0.002137 -0.088219</pose>
+      <pose frame=''>7.220590 1.377340 0.819422 0 0 -0.087610</pose>
     </model>
 
     <!-- Walking person in the living room. -->
@@ -873,15 +881,7 @@
       <pose frame=''>-7.82 -2.43 0 0 0 -3.14</pose>
     </model>
 
-    <!-- Kids room floor toy: Vtech stack rings (pickable). -->
-    <model name='KidsRoom_StackRings'>
-      <include>
-            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/Vtech_Stack_Sing_Rings_636_Months</uri>
-      </include>
-      <pose frame=''>-4.71 -2.95 0.05 0 0 0.01</pose>
-    </model>
-
-    <!-- Step 3: LivingRoom <-> Kitchen divider (N-S wall along x=3.5).
+<!-- Step 3: LivingRoom <-> Kitchen divider (N-S wall along x=3.5).
          Two segments + 2.0m doorway gap centered at y=1.0. Parallel to LivingRoom_West_Divider segments. -->
 
     <model name='LivingRoom_East_North'>

@@ -162,6 +162,30 @@ def generate_launch_description():
   )
   ld.add_action(delay_joint_broadcaster_after_robot_spawner)
 
+  # Safety-net activation: the spawner sometimes returns success while the
+  # broadcaster ends up loaded-but-inactive (race with gz_ros2_control's
+  # auto-load). Without this, /joint_states drops the arm joints, MoveIt's
+  # get_current_joint_state returns zeros, and plan_and_execute reports
+  # false failures. Force-activate 3s after the spawner exits — idempotent
+  # if already active.
+  jsb_force_activate = launch.actions.ExecuteProcess(
+      cmd=["ros2", "control", "set_controller_state",
+           "joint_state_broadcaster", "active"],
+      output="screen",
+  )
+  delay_jsb_force_activate = RegisterEventHandler(
+      event_handler=OnProcessExit(
+          target_action=joint_broadcaster,
+          on_exit=[
+              launch.actions.TimerAction(
+                  period=3.0,
+                  actions=[jsb_force_activate],
+              )
+          ],
+      )
+  )
+  ld.add_action(delay_jsb_force_activate)
+
   # Load and activate arm_controller and robotiq_gripper_controller after joint_state_broadcaster
   # Note: gz_ros2_control auto-loads controllers, which can take ~10s. Spawner will wait/retry.
   arm_controller = launch_ros.actions.Node(
