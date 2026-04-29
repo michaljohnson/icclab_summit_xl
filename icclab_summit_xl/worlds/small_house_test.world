@@ -262,11 +262,15 @@
     -->
      <!-- WALL -->
 	<model name='PortraitA_01'>
-        <static>true</static>    
+        <static>true</static>
         <include>
             <uri>model://aws_robomaker_residential_PortraitA_01</uri>
         </include>
-        <pose frame=''>-2.712360 -4.817539 1.00000 0 -0 1.566796</pose>
+        <!-- Hung on the south wall (y≈-5.5). Centre 5cm into the room
+             to keep the back face flush to the wall (model is ~5cm
+             thick); yaw=π/2 makes the front face point north into
+             the room. -->
+        <pose frame=''>-4.46 -5.45 0.95 0 0 1.5708</pose>
 	</model>
 	
 	<model name='PortraitB_02'>
@@ -703,18 +707,26 @@
 
     <model name='KidsRoom_FurnitureSet'>
       <static>true</static>
+      <!-- Static flag also placed INSIDE the include so it overrides
+           any dynamic link/joint definitions in the source model.
+           Without this, sub-parts can tip / settle under gravity. -->
       <include>
             <uri>model://KID_ROOM_FURNITURE_SET_1</uri>
+            <static>true</static>
       </include>
-      <pose frame=''>-8.128650 -3.723380 0 0 0 -3.139440</pose>
+      <pose frame=''>-8.20 -3.81 0 0 0 -3.05</pose>
     </model>
 
+    <!-- KidsRoom_Ball (cyan/blue Ball_01) removed 2026-04-29 — only one
+         pickable ball per room (the red cricket ball below) keeps SAM3
+         prompts unambiguous. Block kept commented for one-line revert.
     <model name='KidsRoom_Ball'>
       <include>
             <uri>model://aws_robomaker_residential_Ball_01</uri>
       </include>
       <pose frame=''>-6.37 -4.79 0.31 0 0 0</pose>
     </model>
+    -->
 
     <!-- Step 7: Kids-room shelves with LEGO toys (decoration only, all static). -->
     <model name='KidsRoom_Shelf'>
@@ -738,7 +750,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_Duplo_Build_and_Play_Box_4629</uri>
       </include>
-      <pose frame=''>-5.43 -4.59 0.00 0.08 -0.08 1.70</pose>
+      <pose frame=''>-6.34 -4.74 0.00 0 0 2.03</pose>
     </model>
 
     <model name='KidsRoom_Lego_Animals'>
@@ -754,39 +766,296 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_5887_Dino_Defense_HQ</uri>
       </include>
-      <pose frame=''>-4.87 -4.61 0.03 -0.21 -0.02 0.09</pose>
+      <pose frame=''>-5.82 -5.07 0.00 0 0 -0.29</pose>
     </model>
 
-    <model name='KidsRoom_Lego_BricksMore'>
+    <!-- KidsRoom_Lego_BricksMore removed 2026-04-29 to keep shelves
+         book-only. -->
+
+
+    <!-- KidsRoom_Lego_AdventCity removed 2026-04-29 to keep shelves
+         book-only. -->
+
+
+    <!-- Books on the kids-room shelves (Shelf at (-5.50, -1.66) and
+         Shelf_1 at (-4.73, -1.67)). Inline SDF boxes so they always
+         load (no Fuel URI dependency). Standing upright with spine
+         facing south (toward the room). Top-surface z = 0.77, book
+         half-height = 0.125 → centre z = 0.895. -->
+    <model name='KidsRoom_Book_1'>
       <static>true</static>
-      <include>
-            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_Bricks_More_Creative_Suitcase</uri>
-      </include>
-      <pose frame=''>-4.64 -1.77 0.77 0.01 -0.01 0.01</pose>
+      <pose frame=''>-5.70 -1.76 0.895 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.7 0.1 0.1 1</ambient>
+            <diffuse>0.9 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
     </model>
 
-    <model name='KidsRoom_Lego_AdventCity'>
+    <model name='KidsRoom_Book_2'>
       <static>true</static>
-      <include>
-            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_City_Advent_Calendar</uri>
-      </include>
-      <pose frame=''>-5.30 -1.76 0.77 -0.06 -0.01 0.00</pose>
+      <pose frame=''>-5.55 -1.76 0.895 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.1 0.2 0.6 1</ambient>
+            <diffuse>0.2 0.4 0.9 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
     </model>
 
-    <!-- Living room floor item: coke can (pickable). -->
+    <model name='KidsRoom_Book_3'>
+      <static>true</static>
+      <pose frame=''>-4.88 -1.76 0.895 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.7 0.6 0.1 1</ambient>
+            <diffuse>0.95 0.85 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_4'>
+      <static>true</static>
+      <pose frame=''>-4.82 -1.76 0.895 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.1 0.5 0.2 1</ambient>
+            <diffuse>0.2 0.75 0.3 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Lower-tier books (assumes shelf middle level at z≈0.40,
+         book centre at 0.525). Tweak if the SquareShelf model has
+         a different middle-shelf height. -->
+    <model name='KidsRoom_Book_5'>
+      <static>true</static>
+      <pose frame=''>-5.70 -1.76 0.525 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.6 0.3 0.05 1</ambient>
+            <diffuse>0.85 0.45 0.1 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_6'>
+      <static>true</static>
+      <pose frame=''>-5.35 -1.76 0.525 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.4 0.1 0.5 1</ambient>
+            <diffuse>0.6 0.2 0.75 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_7'>
+      <static>true</static>
+      <pose frame=''>-4.88 -1.76 0.525 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.7 0.4 0.5 1</ambient>
+            <diffuse>0.95 0.6 0.7 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_8'>
+      <static>true</static>
+      <pose frame=''>-4.55 -1.76 0.525 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.05 0.4 0.4 1</ambient>
+            <diffuse>0.1 0.6 0.6 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Two books lying flat on the shelf tops for variety. Same
+         dimensions but rotated 90° about Y so the spine is up. -->
+    <model name='KidsRoom_Book_9'>
+      <static>true</static>
+      <!-- Lying flat: 0.04m thick is now the height; centre z = 0.79 -->
+      <pose frame=''>-5.62 -1.62 0.79 0 1.5708 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.85 0.85 0.85 1</ambient>
+            <diffuse>0.95 0.95 0.95 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_10'>
+      <static>true</static>
+      <pose frame=''>-4.85 -1.62 0.79 0 1.5708 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Bottom-tier books filling the empty bottom cubbies of both
+         shelves. z=0.15 puts a 0.25m-tall upright book centred at
+         book_half_height + small floor clearance. -->
+    <model name='KidsRoom_Book_11'>
+      <static>true</static>
+      <pose frame=''>-5.65 -1.76 0.22 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.5 0.05 0.5 1</ambient>
+            <diffuse>0.7 0.1 0.7 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_12'>
+      <static>true</static>
+      <pose frame=''>-5.35 -1.76 0.15 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.05 0.3 0.6 1</ambient>
+            <diffuse>0.1 0.5 0.95 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_13'>
+      <static>true</static>
+      <pose frame=''>-4.88 -1.76 0.15 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.7 0.4 0.05 1</ambient>
+            <diffuse>0.95 0.65 0.1 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name='KidsRoom_Book_14'>
+      <static>true</static>
+      <pose frame=''>-4.55 -1.76 0.15 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+          <material>
+            <ambient>0.05 0.5 0.3 1</ambient>
+            <diffuse>0.1 0.75 0.5 1</diffuse>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Living room: coke can on the coffee table (pickable). -->
     <model name='LivingRoom_Coke'>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coke</uri>
       </include>
-      <pose frame=''>1.50 2.23 0.33 0 0 0</pose>
+      <pose frame=''>1.50 2.04 0.33 0 0 0</pose>
     </model>
 
-    <!-- Parent bedroom floor item: screwdriver (pickable). -->
-    <model name='Bedroom_Screwdriver'>
+    <!-- Parent bedroom floor item: green running shoe (pickable). -->
+    <!-- Bigger pixel target than a screwdriver so SAM3 can lock on
+         from the bedroom entry pose (~2m away). -->
+    <model name='Bedroom_Shoe'>
       <include>
-            <uri>model://craftsman_grip_screwdriver_phillips_cushion</uri>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
       </include>
-      <pose frame=''>-5.50 0.00 0.025 0 0 0</pose>
+      <pose frame=''>-4.93 0.88 0.00 0.01 0.01 -0.24</pose>
+    </model>
+
+    <!-- Living room floor item: matching green running shoe (place
+         reference / drop target). Use case: pick shoe from bedroom,
+         drop it next to this one. East side of living room, near the
+         shoe rack — visible from Living room (TV view) entry. -->
+    <model name='LivingRoom_Shoe'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
+      </include>
+      <pose frame=''>3.84 -4.37 -0.01 0.06 -0.07 -0.39</pose>
     </model>
 
     <!-- Kids room floor item: small red cricket ball (pickable). -->
@@ -795,6 +1064,17 @@
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cricket Ball</uri>
       </include>
       <pose frame=''>-5.14 -3.19 0.04 0 0 0</pose>
+    </model>
+
+    <!-- Kids room floor item: kids backpack (pickable). On the
+         floor in the SW corner near the bunk bed. Bigger pixel
+         target than the cricket ball so SAM3 can lock on more
+         reliably from the kids-room entry pose. -->
+    <model name='KidsRoom_Backpack'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/Olive_Kids_Trains_Planes_Trucks_Bogo_Backpack</uri>
+      </include>
+      <pose frame=''>-4.04 -1.69 -0.01 -0.01 0 1.02</pose>
     </model>
 
     <!-- Living room side: brown trash bin (placement target). -->
@@ -806,53 +1086,107 @@
       <pose frame=''>-1.50 -4.85 0 0 0 0</pose>
     </model>
 
-    <!-- Kids room corner: brown trash bin. -->
-    <model name='KidsRoom_Trash'>
-      <static>true</static>
-      <include>
-            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/TrashBin</uri>
-      </include>
-      <pose frame=''>-3.430390 -1.529940 0 0 0 0</pose>
-    </model>
+    <!-- KidsRoom_Trash removed 2026-04-29 — only the living-room trash
+         bin is needed for the place demo; kids room is for pickups. -->
+
 
     <!-- Books on ShoeRack_01_001: pending — paste exact Fuel URL of the
          "Eat to Live ..." book and we'll re-add. URI variant tried 2026-04-29
          (..._1lb4oz_paperback) returned 404. -->
 
     <!-- Shoes on ShoeRack_01_001 (rack at 4.53, -3.35, yaw=1.56).
-         Z-tiers guessed: bottom ~0.05, middle ~0.25. Tweak after launch. -->
+         Layout: 4 tiers spanning the rack height, 2 shoes per tier
+         spaced 0.35m apart so they don't overlap. Mix of ASICS
+         (white/blue) and Brooks PureConnect (green) for variety.
+         Tier z-values: 0.05 / 0.30 / 0.55 / 0.80 (eyeball-tweak
+         after launch if any shoe floats or sinks into a shelf). -->
+
+    <!-- Tier 1 (bottom, z=0.05) -->
     <model name='ShoeRack_Shoe_1'>
       <static>true</static>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
       </include>
-      <pose frame=''>4.53 -3.10 0.05 0 0 1.57</pose>
+      <pose frame=''>4.53 -3.18 0.05 0 0 1.57</pose>
     </model>
 
     <model name='ShoeRack_Shoe_2'>
       <static>true</static>
       <include>
-            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
       </include>
-      <pose frame=''>4.53 -3.55 0.05 0 0 1.57</pose>
+      <pose frame=''>4.561910 -3.640630 1.008050 -0.068321 -0.088060 1.538720</pose>
     </model>
 
+    <!-- Tier 2 (z=0.30) -->
     <model name='ShoeRack_Shoe_3'>
       <static>true</static>
       <include>
-            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
       </include>
-      <pose frame=''>4.53 -3.30 0.25 0 0 1.57</pose>
+      <pose frame=''>4.53 -3.18 0.30 0 0 1.57</pose>
     </model>
 
-    <!-- Breakfast menu on the kitchen table. -->
-    <model name='Kitchen_BreakfastMenu'>
+    <model name='ShoeRack_Shoe_4'>
       <static>true</static>
       <include>
-            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/breakfast menu decomposed</uri>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
       </include>
-      <pose frame=''>7.220590 1.377340 0.819422 0 0 -0.087610</pose>
+      <pose frame=''>4.53 -3.53 0.30 0 0 1.57</pose>
     </model>
+
+    <!-- Tier 3 (z=0.55) -->
+    <model name='ShoeRack_Shoe_5'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+      </include>
+      <pose frame=''>4.53 -3.18 0.55 0 0 1.57</pose>
+    </model>
+
+    <model name='ShoeRack_Shoe_6'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
+      </include>
+      <pose frame=''>4.53 -3.53 0.55 0 0 1.57</pose>
+    </model>
+
+    <!-- Tier 4 (top, z=0.80) -->
+    <model name='ShoeRack_Shoe_7'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
+      </include>
+      <pose frame=''>4.53 -3.18 0.80 0 0 1.57</pose>
+    </model>
+
+    <model name='ShoeRack_Shoe_8'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+      </include>
+      <pose frame=''>4.53 -3.53 0.80 0 0 1.57</pose>
+    </model>
+
+    <model name='ShoeRack_Shoe_9'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/ASICS_HyperRocketgirl_SP_5_WhiteMalibu_BlueBlack</uri>
+      </include>
+      <pose frame=''>4.53 -3.35 0.30 0 0 1.57</pose>
+    </model>
+
+    <!-- Kitchen_BreakfastMenu removed 2026-04-29; replaced with a
+         salad on a plate. Sits on the dining-table top (z≈0.82). -->
+    <model name='Kitchen_Salad'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/ldowns/models/Salad_on_a_Plate</uri>
+      </include>
+      <pose frame=''>7.22 1.22 0.82 0 0 0</pose>
+    </model>
+
 
     <!-- Walking person in the living room. -->
     <model name='LivingRoom_PersonWalking'>
@@ -872,13 +1206,33 @@
       <pose frame=''>8.06 -4.58 0 0 0 0</pose>
     </model>
 
+    <!-- Male visitor sitting on the living-room sofa (north side). -->
+    <model name='LivingRoom_MaleVisitorSit'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/MaleVisitorSit</uri>
+      </include>
+      <pose frame=''>1.948220 3.732800 0.000000 0 0 0</pose>
+    </model>
+
+    <!-- Folded kitchen towels on the kitchen counter. Initial pose
+         is a guess; user will reposition in Gazebo and update here. -->
+    <model name='Kitchen_Towels'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/Room_Essentials_Kitchen_Towels_16_x_26_2_count</uri>
+      </include>
+      <pose frame=''>8.0 -3.5 0.86 0 0 0</pose>
+    </model>
+
+
     <!-- Kid sitting in the kids room. -->
     <model name='KidsRoom_VisitorKid'>
       <static>true</static>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/VisitorKidSit</uri>
       </include>
-      <pose frame=''>-7.82 -2.43 0 0 0 -3.14</pose>
+      <pose frame=''>-7.84 -2.50 -0.07 0 0 -3.14</pose>
     </model>
 
 <!-- Step 3: LivingRoom <-> Kitchen divider (N-S wall along x=3.5).
