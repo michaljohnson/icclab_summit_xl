@@ -61,8 +61,8 @@
         <update_rate>10</update_rate>
         <camera name="${prefix}">
           <optical_frame_id>${prefix}_rgb_optical_frame</optical_frame_id>
-          <horizontal_fov>1.5707963</horizontal_fov>
-          <vertical_fov>1.2961725</vertical_fov>
+          <horizontal_fov>1.04719755</horizontal_fov>
+          <vertical_fov>0.86393798</vertical_fov>
           <image>
             <!-- <format>B8G8R8</format> -->
             <width>640</width>
