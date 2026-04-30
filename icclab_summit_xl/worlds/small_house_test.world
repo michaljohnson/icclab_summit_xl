@@ -1206,13 +1206,17 @@
       <pose frame=''>8.06 -4.58 0 0 0 0</pose>
     </model>
 
-    <!-- Male visitor sitting on the living-room sofa (north side). -->
+    <!-- Male visitor sitting on the living-room sofa. Repositioned
+         to the west side of the sofa so the figure does not sit in
+         the sight-line between the couch-view entry pose and the
+         coke can on the coffee table (was producing red-shirt /
+         coke-can SAM3 confusion). -->
     <model name='LivingRoom_MaleVisitorSit'>
       <static>true</static>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/MaleVisitorSit</uri>
       </include>
-      <pose frame=''>1.948220 3.732800 0.000000 0 0 0</pose>
+      <pose frame=''>-0.32 3.12 0.00 0 0 1.83</pose>
     </model>
 
     <!-- Folded kitchen towels on the kitchen counter. Initial pose

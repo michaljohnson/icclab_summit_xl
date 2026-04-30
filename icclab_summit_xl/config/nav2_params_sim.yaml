@@ -47,7 +47,10 @@ amcl:
     z_short: 0.05
     scan_topic: "/scan"
     set_initial_pose: True
-    initial_pose: {x: 0.0, y: 2.0, z: 0.0, yaw: 0.0}
+    # Match the launch-file robot spawn pose so AMCL boots correctly
+    # the first time without manual /initialpose seeding (spawn coords
+    # set in summit_xl_simulation_ign.launch.py robot_spawner).
+    initial_pose: {x: 1.1031, y: -0.685, z: 0.0, yaw: -1.36}
 
 bt_navigator:
   ros__parameters:
