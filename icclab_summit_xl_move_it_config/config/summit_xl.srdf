@@ -49,12 +49,12 @@
         <joint name="arm_wrist_3_joint" value="0"/>
     </group_state>
     <group_state name="look_down_high" group="arm">
-        <joint name="arm_elbow_joint" value="-0.3570"/>
-        <joint name="arm_shoulder_lift_joint" value="-1.2718"/>
-        <joint name="arm_shoulder_pan_joint" value="-0.6495"/>
-        <joint name="arm_wrist_1_joint" value="3.5938"/>
-        <joint name="arm_wrist_2_joint" value="-4.3710"/>
-        <joint name="arm_wrist_3_joint" value="5.5258"/>
+        <joint name="arm_shoulder_pan_joint" value="0"/>
+        <joint name="arm_shoulder_lift_joint" value="-1.2"/>
+        <joint name="arm_elbow_joint" value="-0.5"/>
+        <joint name="arm_wrist_1_joint" value="-2.0"/>
+        <joint name="arm_wrist_2_joint" value="1.5708"/>
+        <joint name="arm_wrist_3_joint" value="0"/>
     </group_state>
     <group_state name="closed" group="gripper">
         <joint name="finger_joint" value="0.699"/>
