@@ -974,12 +974,12 @@
       </link>
     </model>
 
-    <!-- Living room: coke can on the coffee table (pickable). -->
-    <model name='LivingRoom_Coke'>
+    <!-- Kitchen: coke can on the kitchen floor (pickable). -->
+    <model name='Kitchen_Coke'>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coke</uri>
       </include>
-      <pose frame=''>1.50 2.04 0.33 0 0 0</pose>
+      <pose frame=''>6.93 -2.97 0.06 0 0 0</pose>
     </model>
 
     <!-- Parent bedroom floor item: green running shoe (pickable). -->
@@ -1023,17 +1023,14 @@
       <pose frame=''>-4.04 -1.69 -0.01 -0.01 0 1.02</pose>
     </model>
 
-    <!-- Living room side: brown trash bin (placement target). -->
-    <model name='LivingRoom_Trash'>
+    <!-- Kids room: brown trash bin (placement target). -->
+    <model name='KidsRoom_Trash'>
       <static>true</static>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/TrashBin</uri>
       </include>
-      <pose frame=''>-1.50 -4.85 0 0 0 0</pose>
+      <pose frame=''>-4.92 -4.85 0 0 0 0</pose>
     </model>
-
-    <!-- KidsRoom_Trash removed 2026-04-29 — only the living-room trash
-         bin is needed for the place demo; kids room is for pickups. -->
 
 
     <!-- Books on ShoeRack_01_001: pending — paste exact Fuel URL of the
