@@ -328,12 +328,19 @@
         <pose frame=''>0.629509 -5.183576 -0.017049 0 -0 1.5792</pose>
 	</model>
 <model name='Wardrobe_01_001'>
-        <static>true</static>    
+        <static>true</static>
         <include>
             <uri>model://aws_robomaker_residential_Wardrobe_01</uri>
         </include>
         <pose frame=''>-3.146710 2.476204 0.000704 0 -0 -1.569673</pose>
 	</model>
+    <model name='KidsRoom_Wardrobe'>
+        <static>true</static>
+        <include>
+            <uri>model://aws_robomaker_residential_Wardrobe_01</uri>
+        </include>
+        <pose frame=''>-3.08 -4.53 0.000704 0 0 -1.57</pose>
+    </model>
         <model name='RoomWindow_01_001'>
         <static>true</static>    
         <include>
@@ -628,7 +635,7 @@
       <include>
             <uri>model://aws_robomaker_residential_Door_01</uri>
       </include>
-      <pose frame=''>-2.98 1.53 0 0 0 -0.92</pose>
+      <pose frame=''>-2.19 1.52 0 0 0 -2.03</pose>
     </model>
 
     <model name='KidsRoom_Door'>
@@ -636,7 +643,7 @@
       <include>
             <uri>model://aws_robomaker_residential_Door_01</uri>
       </include>
-      <pose frame=''>-3.02 -4.09 0 0 0 -2.36</pose>
+      <pose frame=''>-2.12 -4.07 0 0 0 2.34</pose>
     </model>
 
     <!-- Step 5: Kids bed in the SW corner, clear of the east doorway (y=-3.41 gap). -->
@@ -679,7 +686,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/SquareShelf</uri>
       </include>
-      <pose frame=''>-5.50 -1.66 0 0 0 0</pose>
+      <pose frame=''>-6.50 -1.66 0 0 0 0</pose>
     </model>
 
     <model name='KidsRoom_Shelf_1'>
@@ -687,7 +694,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/SquareShelf</uri>
       </include>
-      <pose frame=''>-4.73 -1.67 0 0 0 0</pose>
+      <pose frame=''>-5.73 -1.67 0 0 0 0</pose>
     </model>
 
     <model name='KidsRoom_Lego_BuildPlay'>
@@ -703,7 +710,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/LEGO_Duplo_Creative_Animals_10573</uri>
       </include>
-      <pose frame=''>-8.82 -3.67 1.11 0.01 0.00 -0.09</pose>
+      <pose frame=''>-8.81 -3.76 1.11 0 -0.01 -1.47</pose>
     </model>
 
     <model name='KidsRoom_Lego_DinoHQ'>
@@ -729,7 +736,7 @@
          half-height = 0.125 → centre z = 0.895. -->
     <model name='KidsRoom_Book_1'>
       <static>true</static>
-      <pose frame=''>-5.70 -1.76 0.895 0 0 0</pose>
+      <pose frame=''>-6.70 -1.76 0.895 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -746,7 +753,7 @@
 
     <model name='KidsRoom_Book_2'>
       <static>true</static>
-      <pose frame=''>-5.55 -1.76 0.895 0 0 0</pose>
+      <pose frame=''>-6.55 -1.76 0.895 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -763,7 +770,7 @@
 
     <model name='KidsRoom_Book_3'>
       <static>true</static>
-      <pose frame=''>-4.88 -1.76 0.895 0 0 0</pose>
+      <pose frame=''>-5.88 -1.76 0.895 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -780,7 +787,7 @@
 
     <model name='KidsRoom_Book_4'>
       <static>true</static>
-      <pose frame=''>-4.82 -1.76 0.895 0 0 0</pose>
+      <pose frame=''>-5.82 -1.76 0.895 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -800,7 +807,7 @@
          a different middle-shelf height. -->
     <model name='KidsRoom_Book_5'>
       <static>true</static>
-      <pose frame=''>-5.70 -1.76 0.525 0 0 0</pose>
+      <pose frame=''>-6.70 -1.76 0.525 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -817,7 +824,7 @@
 
     <model name='KidsRoom_Book_6'>
       <static>true</static>
-      <pose frame=''>-5.35 -1.76 0.525 0 0 0</pose>
+      <pose frame=''>-6.35 -1.76 0.525 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -834,7 +841,7 @@
 
     <model name='KidsRoom_Book_7'>
       <static>true</static>
-      <pose frame=''>-4.88 -1.76 0.525 0 0 0</pose>
+      <pose frame=''>-5.88 -1.76 0.525 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -851,7 +858,7 @@
 
     <model name='KidsRoom_Book_8'>
       <static>true</static>
-      <pose frame=''>-4.55 -1.76 0.525 0 0 0</pose>
+      <pose frame=''>-5.55 -1.76 0.525 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -871,7 +878,7 @@
     <model name='KidsRoom_Book_9'>
       <static>true</static>
       <!-- Lying flat: 0.04m thick is now the height; centre z = 0.79 -->
-      <pose frame=''>-5.62 -1.62 0.79 0 1.5708 0</pose>
+      <pose frame=''>-6.62 -1.62 0.79 0 1.5708 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -888,7 +895,7 @@
 
     <model name='KidsRoom_Book_10'>
       <static>true</static>
-      <pose frame=''>-4.85 -1.62 0.79 0 1.5708 0</pose>
+      <pose frame=''>-5.85 -1.62 0.79 0 1.5708 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -908,7 +915,7 @@
          book_half_height + small floor clearance. -->
     <model name='KidsRoom_Book_11'>
       <static>true</static>
-      <pose frame=''>-5.65 -1.76 0.22 0 0 0</pose>
+      <pose frame=''>-6.65 -1.76 0.22 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -925,7 +932,7 @@
 
     <model name='KidsRoom_Book_12'>
       <static>true</static>
-      <pose frame=''>-5.35 -1.76 0.15 0 0 0</pose>
+      <pose frame=''>-6.35 -1.76 0.15 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -942,7 +949,7 @@
 
     <model name='KidsRoom_Book_13'>
       <static>true</static>
-      <pose frame=''>-4.88 -1.76 0.15 0 0 0</pose>
+      <pose frame=''>-5.88 -1.76 0.15 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -959,7 +966,7 @@
 
     <model name='KidsRoom_Book_14'>
       <static>true</static>
-      <pose frame=''>-4.55 -1.76 0.15 0 0 0</pose>
+      <pose frame=''>-5.55 -1.76 0.15 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry><box><size>0.18 0.04 0.25</size></box></geometry>
@@ -989,7 +996,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
       </include>
-      <pose frame=''>-4.43 0.76 0.00 0.02 0.01 -0.24</pose>
+      <pose frame=''>-4.90 0.87 0.00 0.05 -0.05 -0.24</pose>
     </model>
 
     <!-- Living room floor item: matching green running shoe (place
@@ -1000,7 +1007,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/PureConnect_2_Color_FernNightlifeSilverBlack_Size_70_5w0BYsiogeV</uri>
       </include>
-      <pose frame=''>3.84 -4.37 -0.01 0.06 -0.07 -0.39</pose>
+      <pose frame=''>4.06 -3.61 -0.02 0.06 -0.02 2.00</pose>
     </model>
 
     <!-- Kids room floor item: 7.5cm wooden cube (pickable). Solid
@@ -1008,9 +1015,9 @@
          when grazed. Friendly to top-down grasp + Robotiq fingers. -->
     <model name='KidsRoom_WoodCube'>
       <include>
-            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/wood cube 7.5cm</uri>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/wood cube 10cm</uri>
       </include>
-      <pose frame=''>-4.846 -2.981 0 0 0 0</pose>
+      <pose frame=''>-5.50 -2.98 0 0 0 0</pose>
     </model>
 
     <!-- Kids room floor decoration: kids backpack (NOT a pick target —
@@ -1020,7 +1027,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/Olive_Kids_Trains_Planes_Trucks_Bogo_Backpack</uri>
       </include>
-      <pose frame=''>-4.04 -1.69 -0.01 -0.01 0 1.02</pose>
+      <pose frame=''>-4.45 -5.05 0 0 0.01 -3.09</pose>
     </model>
 
     <!-- Kids room: brown trash bin (placement target). -->
@@ -1029,7 +1036,7 @@
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/TrashBin</uri>
       </include>
-      <pose frame=''>-4.92 -4.85 0 0 0 0</pose>
+      <pose frame=''>-4.19 -1.56 0 0 0 -1.47</pose>
     </model>
 
 
