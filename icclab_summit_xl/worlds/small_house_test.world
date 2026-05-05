@@ -339,7 +339,7 @@
         <include>
             <uri>model://aws_robomaker_residential_Wardrobe_01</uri>
         </include>
-        <pose frame=''>-3.08 -4.53 0.000704 0 0 -1.57</pose>
+        <pose frame=''>-3.40 -5.10 0.000000 0 0 3.09</pose>
     </model>
         <model name='RoomWindow_01_001'>
         <static>true</static>    
