@@ -38,7 +38,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from std_msgs.msg import String, Empty, Bool
-from sensor_msgs.msg import PointCloud2
+from sensor_msgs.msg import PointCloud2, JointState
 from geometry_msgs.msg import TransformStamped, Pose, Point
 from shape_msgs.msg import Mesh, MeshTriangle
 from moveit_msgs.msg import CollisionObject, AttachedCollisionObject
@@ -209,6 +209,13 @@ class GripperAttachNode(Node):
     def __init__(self):
         super().__init__('gripper_attach_node')
 
+        # We always run alongside Gazebo, which publishes TFs with sim-time
+        # stamps. Without sim-time the TF buffer's `now()` is wall clock and
+        # every incoming TF looks like data from the past → silent lookup
+        # failures and TF_OLD_DATA spam.
+        from rclpy.parameter import Parameter as _Parameter
+        self.set_parameters([_Parameter('use_sim_time', _Parameter.Type.BOOL, True)])
+
         # Finger pads are ~18 cm from the base link — use their midpoint for proximity
         self.declare_parameter('finger_link_left',   'left_inner_finger_pad')
         self.declare_parameter('finger_link_right',  'right_inner_finger_pad')
@@ -220,6 +227,19 @@ class GripperAttachNode(Node):
         self.declare_parameter('robot_tf_frame',     'base_footprint')
         self.declare_parameter('attach_distance',    0.15)
         self.declare_parameter('max_match_distance', 0.30)
+        # min_finger_position: gripper finger_joint must be at least this many
+        # radians closed before attach can fire. 0.0 = fully open, ~0.7 = fully
+        # closed-empty for Robotiq 140. 0.10 = the close-gripper action has at
+        # least started moving the fingers. This is the primary fix for the
+        # "object snaps to gripper at pre-grasp" visual: at pre-grasp and
+        # during descent the gripper is still open (finger_joint ≈ 0), so
+        # the precondition rejects attach. Only after the close-gripper
+        # action fires does finger_joint move past 0.10 and attach proceed.
+        # The threshold is intentionally low so it doesn't block wider
+        # objects (closure stops earlier when the fingers hit something:
+        # 8cm shoe ≈ 0.20 rad, 5cm cube ≈ 0.45 rad). Mirrors real-robot
+        # physics: a real gripper can only hold what it has closed around.
+        self.declare_parameter('min_finger_position', 0.10)
         self.declare_parameter('exclude_prefixes',
                                'summit,ground_plane,sun,aws_robomaker')
         self.declare_parameter('gz_world',           'world_demo')
@@ -232,6 +252,11 @@ class GripperAttachNode(Node):
         self._robot_tf_frame = self.get_parameter('robot_tf_frame').value
         self._attach_dist    = self.get_parameter('attach_distance').value
         self._max_match_dist = self.get_parameter('max_match_distance').value
+        self._min_finger_pos = self.get_parameter('min_finger_position').value
+        # Latest finger_joint position from /joint_states (None until first msg).
+        # The joint_state_broadcaster publishes the full state including
+        # finger_joint; we only update when finger_joint appears in the name list.
+        self._finger_pos: float | None = None
         self._gz_world       = self.get_parameter('gz_world').value
         excl = self.get_parameter('exclude_prefixes').value
         self._exclude        = [s.strip() for s in excl.split(',') if s.strip()]
@@ -280,6 +305,14 @@ class GripperAttachNode(Node):
         # Publish initial state so late subscribers always get a value.
         self._status_pub.publish(String(data='detached'))
         self._attached_pub.publish(Bool(data=False))
+
+        # Track gripper finger position from /joint_states. The
+        # joint_state_broadcaster publishes the full state including
+        # finger_joint; the ros_gz_bridge publisher only includes wheels.
+        # We update only when finger_joint appears in the name list.
+        self.create_subscription(
+            JointState, '/joint_states', self._joint_state_cb, 10
+        )
 
         # Explicit detach trigger from pick-and-place scripts.
         # Accept both Empty (original) and String (works reliably over rosbridge,
@@ -456,13 +489,49 @@ class GripperAttachNode(Node):
 
         if not self._attached:
             if self._target_model and dist < self._attach_dist:
-                self._do_attach()
+                # Closure precondition: gripper must be at least partially
+                # closed before attach can fire. Mirrors real-robot physics
+                # where attachment requires fingers to close around an object.
+                # If finger_joint hasn't been observed yet, fall back to
+                # distance-only (preserves prior behaviour during startup).
+                if (
+                    self._finger_pos is None
+                    or self._finger_pos >= self._min_finger_pos
+                ):
+                    self._do_attach()
+                else:
+                    self.get_logger().info(
+                        f'attach distance OK ({dist:.3f}m < {self._attach_dist:.3f}m) '
+                        f'but finger_joint={self._finger_pos:.3f} < '
+                        f'{self._min_finger_pos:.3f} — waiting for gripper to close',
+                        throttle_duration_sec=1.0,
+                    )
         # If attached, don't auto-detach based on distance — the centroid is frozen
         # at the pre-grasp position so distance grows as soon as the arm lifts.
 
     # ------------------------------------------------------------------
     # Attach / detach (Gz + MoveIt)
     # ------------------------------------------------------------------
+
+    def _joint_state_cb(self, msg: JointState):
+        """Update self._finger_pos when finger_joint appears in the message.
+
+        Only the joint_state_broadcaster publishes the full state including
+        finger_joint; the ros_gz_bridge publishes a wheels-only state on the
+        same topic. Updating only when the joint name appears keeps the
+        latest finger position stable across both publishers.
+        """
+        try:
+            idx = msg.name.index('finger_joint')
+        except ValueError:
+            return
+        first = self._finger_pos is None
+        self._finger_pos = float(msg.position[idx])
+        if first:
+            self.get_logger().info(
+                f'finger_joint subscription live; first observed position = '
+                f'{self._finger_pos:.3f} rad (closed-empty ≈ 0.7)'
+            )
 
     def _force_detach_cb(self, _msg):
         self.get_logger().info('force_detach received')
@@ -651,27 +720,38 @@ class GripperAttachNode(Node):
         with self._poses_lock:
             poses_gz = dict(self._model_poses_gz)
 
-        best_name, best_dist = None, self._max_match_dist
-        closest_any_name, closest_any_dist = None, float('inf')
+        # Collect every non-excluded candidate's distance; sort top-3 for log.
+        # This makes coke-can-style "auto-resolve returns None" failures
+        # easy to debug — the user sees which model was closest, what
+        # the runner-ups were, and how far over the threshold the best
+        # candidate fell.
+        candidates: list[tuple[str, float]] = []
         for name, (pos_gz, _q) in poses_gz.items():
             if any(name.startswith(p) for p in self._exclude):
                 continue
             pos_ros = R @ pos_gz + t
             d = float(np.linalg.norm(pos_ros - centroid_ros))
-            if d < closest_any_dist:
-                closest_any_dist, closest_any_name = d, name
-            if d < best_dist:
-                best_dist, best_name = d, name
+            candidates.append((name, d))
+        candidates.sort(key=lambda nd: nd[1])
+        top3 = candidates[:3]
+        top3_str = ', '.join(f'"{n}" {d:.3f}m' for n, d in top3) or '<none>'
+
+        best_name, best_dist = (None, self._max_match_dist)
+        if candidates and candidates[0][1] < self._max_match_dist:
+            best_name, best_dist = candidates[0]
 
         if best_name and best_name != self._target_model:
             self.get_logger().info(
-                f'Auto-resolved target: "{best_name}" ({best_dist:.3f} m from centroid)'
+                f'Auto-resolved target: "{best_name}" ({best_dist:.3f}m). '
+                f'Top-3: [{top3_str}]'
             )
         elif best_name is None:
             self.get_logger().warn(
-                f'No model within {self._max_match_dist:.2f}m. '
-                f'Closest: "{closest_any_name}" at {closest_any_dist:.3f}m. '
-                f'centroid={centroid_ros.tolist()}',
+                f'No model within {self._max_match_dist:.2f}m of centroid '
+                f'{[round(v, 3) for v in centroid_ros.tolist()]}. '
+                f'Top-3 candidates: [{top3_str}]. '
+                f'If the intended target is in this list just over the '
+                f'threshold, raise the `max_match_distance` launch param.',
                 throttle_duration_sec=5.0,
             )
         return best_name
