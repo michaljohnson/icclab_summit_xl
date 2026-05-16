@@ -1,8 +1,20 @@
-# 3D sensors disabled due to wrong frames for octomaps using Gazebo simulation;
-# sensors: []
-sensors:
-  - arm_camera
-  - front_rgbd_camera
+# 3D sensors intentionally disabled (sensors: []).
+#
+# moveit-mcp's MoveItPy spins up its own in-process octomap_updater
+# independent of move_group's. With the camera entries below active,
+# stale voxels accumulate (max_update_rate=1.0, padding_scale=4.0,
+# octomap_frame=odom) and CheckStartStateCollision aborts every plan
+# with "<octomap> - arm_*" contacts on the arm links. move_group's
+# /clear_octomap has no effect on the in-process copy.
+#
+# Validated fix: empty sensor list. The arm_camera / front_rgbd_camera
+# entries are preserved below for reference; do NOT re-enable without
+# first fixing max_update_rate, padding_scale, and octomap_frame, and
+# verifying moveit-mcp picks up the corrected config on restart.
+sensors: []
+# sensors:
+#   - arm_camera
+#   - front_rgbd_camera
 arm_camera:
   far_clipping_plane_distance: 5.0
   filtered_cloud_topic: /filtered_cloud_arm
