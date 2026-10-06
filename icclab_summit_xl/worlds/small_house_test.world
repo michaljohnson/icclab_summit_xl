@@ -1039,6 +1039,61 @@
       <pose frame=''>-3.84 -5.04 0 0 0 -1.47</pose>
     </model>
 
+    <!-- Living room: brown trash bin (defense-demo placement target). Same
+         model as KidsRoom_Trash. Placed away from the coffee table so the
+         robot must search/navigate for it. -->
+    <model name='LivingRoom_Trash'>
+      <static>true</static>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/TrashBin</uri>
+      </include>
+      <pose frame=''>3.11474 -4.83756 0 0 0 -1.47</pose>
+    </model>
+
+    <!-- Living room: green coke can (66mm dia, graspable by the Robotiq 140) on
+         top of the wooden coffee table CoffeeTable_01_002 (centre 1.26 2.14, top
+         world-z ~0.364). Pick target for the object-agnostic / surface-agnostic
+         defense demo. Replaces the Master Chef Can (100mm), which was too wide
+         for the gripper to close on and trip the attach precondition. Near the
+         south/room-facing edge; not static (it must be graspable). SAM3 prompt
+         for this object is "green can" / "coke can", NOT "blue can". -->
+    <model name='LivingRoom_GreenCokeCan'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/myoan/models/Movable green coke can</uri>
+      </include>
+      <pose frame=''>1.30 1.90 0.365 0 0 0</pose>
+    </model>
+
+    <!-- Living room: extra pick-test fruits on the coffee table (object-agnostic
+         demo test set). Gambit scanned meshes with very light mass and a baked-in
+         model pose, so the inner <pose>0 0 0</pose> neutralises that and the outer
+         pose seats them. They are round + featherweight, so expect higher variance
+         than the can. z (0.40) is eyeball-tunable after launch if any float/sink.
+         SAM3 prompts: "peach" / "plum" / "strawberry". -->
+    <model name='LivingRoom_Peach'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/Gambit/models/Peach</uri>
+            <pose>0 0 0 0 0 0</pose>
+      </include>
+      <pose frame=''>1.08 1.93 0.40 0 0 0</pose>
+    </model>
+
+    <model name='LivingRoom_Plum'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/Gambit/models/Plum</uri>
+            <pose>0 0 0 0 0 0</pose>
+      </include>
+      <pose frame=''>1.52 1.93 0.40 0 0 0</pose>
+    </model>
+
+    <model name='LivingRoom_Strawberry'>
+      <include>
+            <uri>https://fuel.gazebosim.org/1.0/Gambit/models/Strawberry</uri>
+            <pose>0 0 0 0 0 0</pose>
+      </include>
+      <pose frame=''>1.70 1.92 0.40 0 0 0</pose>
+    </model>
+
 
     <!-- Books on ShoeRack_01_001: pending — paste exact Fuel URL of the
          "Eat to Live ..." book and we'll re-add. URI variant tried 2026-04-29
