@@ -985,6 +985,7 @@
     <model name='Kitchen_Coke'>
       <include>
             <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coke</uri>
+            <static>false</static>
       </include>
       <pose frame=''>5.99 -0.14 0.06 0 0 0</pose>
     </model>
